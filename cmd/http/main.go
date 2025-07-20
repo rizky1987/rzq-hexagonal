@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"os"
+	echoHandler "rzq-hexagonal/adapter/http/handler/echo"
 	"rzq-hexagonal/infrastructure/factory"
 	"rzq-hexagonal/infrastructure/router"
 )
@@ -19,6 +20,7 @@ func startFramework(frameworkName, port string, servicesFactory *factory.Service
 
 	app := router.NewEchoRouter()
 	app.RegisterMiddleware()
+	app.RegisterRoutes(&echoHandler.EchoHandler{servicesFactory})
 	err := app.Start(port)
 
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
