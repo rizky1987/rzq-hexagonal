@@ -3,11 +3,11 @@ package reposirory_factory
 import (
 	"fmt"
 	"os"
-	repositoryPostgresInterface "rzq-hexagonal/port/outbound/repository/postgres"
+	repositoryInterface "rzq-hexagonal/port/outbound"
 )
 
 type RepositoryFactory struct {
-	UserRepository repositoryPostgresInterface.UserRepository
+	UserRepository repositoryInterface.UserRepository
 }
 
 func NewRepositoryFactory() *RepositoryFactory {
