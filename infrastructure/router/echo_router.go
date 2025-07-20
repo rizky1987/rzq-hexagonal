@@ -23,6 +23,7 @@ func (r *EchoRouter) RegisterMiddleware() {
 }
 
 func (r *EchoRouter) RegisterRoutes(echoHandler *handler.EchoHandler) {
+	r.app.POST("/register", echoHandler.Register)
 }
 
 func (r *EchoRouter) Start(port string) error {
