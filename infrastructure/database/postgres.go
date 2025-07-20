@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 	"os"
+	"rzq-hexagonal/domain/entity"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -40,6 +41,10 @@ func NewPostgresDB() *gorm.DB {
 }
 
 func AutoMigrate(db *gorm.DB) error {
+	err := db.AutoMigrate(&entity.User{})
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
