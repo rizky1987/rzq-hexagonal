@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	echoHandler "rzq-hexagonal/adapter/http/handler/echo"
+	fiberHandler "rzq-hexagonal/adapter/http/handler/fiber"
+	"rzq-hexagonal/infrastructure/constanta"
 	"rzq-hexagonal/infrastructure/factory"
 	"rzq-hexagonal/infrastructure/router"
 )
@@ -18,13 +20,28 @@ func main() {
 
 func startFramework(frameworkName, port string, servicesFactory *factory.ServicesFactory) error {
 
-	app := router.NewEchoRouter()
-	app.RegisterMiddleware()
-	app.RegisterRoutes(&echoHandler.EchoHandler{servicesFactory})
-	err := app.Start(port)
+	switch frameworkName {
+	case constanta.FrameworkTypeEcho:
 
-	if err != nil && !errors.Is(err, http.ErrServerClosed) {
-		return err
+		app := router.NewEchoRouter()
+		app.RegisterMiddleware()
+		app.RegisterRoutes(&echoHandler.EchoHandler{servicesFactory})
+		err := app.Start(port)
+
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
+			return err
+		}
+	case constanta.FrameworkTypeFiber:
+		app := router.NewFiberRouter()
+		app.RegisterMiddleware()
+		app.RegisterRoutes(&fiberHandler.FiberHandler{servicesFactory})
+		err := app.Start(port)
+
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
+			return err
+		}
+	default:
+		return errors.New("please choice your framework")
 	}
 
 	return nil
