@@ -3,6 +3,7 @@ package reposirory_factory
 import (
 	"fmt"
 	"os"
+	"rzq-hexagonal/infrastructure/constanta"
 	repositoryInterface "rzq-hexagonal/port/outbound"
 )
 
@@ -16,7 +17,7 @@ func NewRepositoryFactory() *RepositoryFactory {
 		panic(fmt.Sprintf("Please input CONFIG_CURRENT_DATABASE"))
 	}
 
-	if currentDatabaseEnv == "postgres" {
+	if currentDatabaseEnv == constanta.DatabaseTypePostgres {
 		return GeneratePostgresRepository()
 	}
 

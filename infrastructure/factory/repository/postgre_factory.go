@@ -1,6 +1,14 @@
 package reposirory_factory
 
-func GeneratePostgresRepository() *RepositoryFactory {
+import (
+	repositoryPostgresImpl "rzq-hexagonal/domain/repository/postgres"
+	dbInfra "rzq-hexagonal/infrastructure/database"
+)
 
-	return &RepositoryFactory{}
+func GeneratePostgresRepository() *RepositoryFactory {
+	dbSession := dbInfra.NewPostgresDB()
+
+	return &RepositoryFactory{
+		UserRepository: repositoryPostgresImpl.NewUserRepository(dbSession),
+	}
 }
