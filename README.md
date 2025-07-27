@@ -13,6 +13,8 @@ You can switch between branches to learn incrementally. Every change is committe
 The `main` branch acts as the base project. From there, you can jump into other branches to explore specific features or implementations.
 
 ## 📚 Available Learning Branches
+Below are some learning branches currently available.  
+> ⚠️ **Note:** New branches will continue to be added as we cover more real-world use cases.
 
 - [`learn/create-new-endpoint`](https://https://github.com/rizky1987/rzq-hexagonal/tree/learn/create-new-endpoint)  
   Learn how to create a new API endpoint using the Hexagonal Architecture pattern.
