@@ -5,8 +5,9 @@ import (
 	"rzq-hexagonal/adapter/http/request"
 	"rzq-hexagonal/adapter/http/response"
 	"rzq-hexagonal/infrastructure/factory"
-
+    
 	"github.com/labstack/echo/v4"
+	"fmt"
 )
 
 type EchoHandler struct {
@@ -15,6 +16,9 @@ type EchoHandler struct {
 
 func (h *EchoHandler) Register(c echo.Context) error {
 
+	for i:=0; i<10; i++ {
+		fmt.Println(i)
+	}
 	var req request.RegisterRequest
 	if err := c.Bind(&req); err != nil {
 		return err
